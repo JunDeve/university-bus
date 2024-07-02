@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIU-GO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+
+        .container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #disembarkButton {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin-top: 20px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            #status {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>경일대학교 스쿨버스 KIU-GO</h1>
+        <div class="button-container">
+            <button id="checkButton">내 탑승 여부 확인하기</button>
+            <button id="disembarkButton">내리기</button>
+        </div>
+        <p id="status"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+        import { getAuth, signInAnonymously, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCX3H11fg3VI2WA5Xg8MERTZBw6VLugvTg",
+            authDomain: "kiu-go.firebaseapp.com",
+            databaseURL: "https://kiu-go-default-rtdb.firebaseio.com",
+            projectId: "kiu-go",
+            storageBucket: "kiu-go.appspot.com",
+            messagingSenderId: "242417194615",
+            appId: "1:242417194615:web:c316bde83f309c2a759872",
+            measurementId: "G-HFBR18SCMP"
+        };
+
+        const firebaseApp = initializeApp(firebaseConfig);
+        const database = getDatabase(firebaseApp);
+        const auth = getAuth(firebaseApp);
+
+        const maxPassengers = 40;
+        const passengersRef = ref(database, 'passengers/value');
+        const checkButton = document.getElementById('checkButton');
+        const disembarkButton = document.getElementById('disembarkButton');
+
+        function updateUI(snapshot) {
+            const currentPassengers = snapshot.val();
+            document.getElementById('status').innerHTML = `현재 탑승자 수: ${currentPassengers}<br>최대 탑승자 수: ${maxPassengers}`;
+            if (sessionStorage.getItem('boarded') === 'true') {
+                checkButton.disabled = true;
+                checkButton.innerText = "탑승 완료";
+                disembarkButton.style.display = "inline-block";
+            } else {
+                checkButton.disabled = false;
+                checkButton.innerText = "내 탑승 여부 확인하기";
+                disembarkButton.style.display = "none";
+            }
+        }
+
+        checkButton.addEventListener('click', () => {
+            checkButton.disabled = true;
+            checkButton.innerText = "잠시만 기다려주세요...";
+            setTimeout(() => {
+                onValue(passengersRef, updateUI);
+            }, 1000);
+
+            runTransaction(passengersRef, (currentValue) => {
+                return (currentValue || 0) + 1;
+            }).then(() => {
+                sessionStorage.setItem('boarded', 'true');
+                onValue(passengersRef, updateUI);
+            });
+        });
+
+        // 익명 로그인
+        signInAnonymously(auth)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log("로그인 성공:", user);
+            })
+            .catch((error) => {
+                console.error("로그인 실패:", error);
+            });
+
+        // 로그아웃 버튼을 클릭할 때
+        disembarkButton.addEventListener('click', () => {
+            runTransaction(passengersRef, (currentValue) => {
+                return (currentValue || 0) - 1;
+            }).then(() => {
+                sessionStorage.removeItem('boarded');
+                signOut(auth)
+                    .then(() => {
+                        console.log("로그아웃되었습니다.");
+                        checkButton.disabled = false;
+                        checkButton.innerText = "내 탑승 여부 확인하기";
+                        disembarkButton.style.display = "none";
+                        document.getElementById('status').innerHTML = "";
+                    })
+                    .catch((error) => {
+                        console.error("로그아웃 중 오류 발생:", error);
+                    });
+            });
+        });
+
+        // 세션 초기화 함수
+        function resetSession() {
+            runTransaction(passengersRef, (currentValue) => {
+                return 0; // 모든 탑승자를 0으로 설정
+            }).then(() => {
+                sessionStorage.removeItem('boarded');
+                signOut(auth).then(() => {
+                    console.log("세션이 초기화되어 로그아웃되었습니다.");
+                    checkButton.disabled = false;
+                    checkButton.innerText = "내 탑승 여부 확인하기";
+                    disembarkButton.style.display = "none";
+                    document.getElementById('status').innerHTML = "";
+                }).catch((error) => {
+                    console.error("로그아웃 중 오류 발생:", error);
+                });
+            });
+        }
+
+        // 자정에 세션 초기화
+        function resetSessionAtMidnight() {
+            const now = new Date();
+            const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0) - now;
+
+            setTimeout(() => {
+                resetSession();
+
+                // 자정에 다시 실행
+                resetSessionAtMidnight();
+            }, millisTillMidnight);
+        }
+
+        // 30분마다 세션 초기화
+        function resetSessionEveryThirtyMinutes() {
+            const thirtyMinutes = 30 * 60 * 1000;
+
+            setInterval(() => {
+                resetSession();
+            }, thirtyMinutes);
+        }
+
+        // 페이지 로드 시 자정에 세션 초기화를 예약
+        resetSessionAtMidnight();
+
+        // 페이지 로드 시 30분마다 세션 초기화를 예약
+        resetSessionEveryThirtyMinutes();
+
+        onValue(passengersRef, updateUI);
+    </script>
+</body>
+
+</html>
