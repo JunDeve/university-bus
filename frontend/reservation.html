@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>스쿨버스 예약</title>
+    <link rel="stylesheet" href="style1.css" />
+    <!-- <script src="script.js" defer></script> -->
+</head>
+<body>
+    <div data-role="page" id="reservation_page">
+        <h1>스쿨버스 예약</h1>
+        <div data-role="content">
+            <form id="reservation-form">
+                <div data-role="fieldcontain">
+                    <label>예약 시간</label>
+                    <select name="route_time" id="route_time" required>
+                        <option value="">예약 시간</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:20">17:20</option>
+                        <option value="17:40">17:40</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="18:45">18:45</option>
+                        <option value="19:10">19:10</option>
+                        <option value="20:10">20:10</option>
+                        <option value="21:10">21:10</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label>노선 선택</label>
+                    <select name="route" id="route" required>
+                        <option value="">노선 선택</option>
+                        <option value="대구 하교">대구 하교</option>
+                        <option value="안심·임당 하교">안심·임당 하교</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="boarding_date">탑승 일자</label>
+                    <input type="date" id="boarding_date" name="boarding_date" required>
+                </div>
+                <input type="submit" value="예약">
+            </form>
+        </div>
+        <h4></h4>
+    </div>
+
+    <script>
+        // 예약 완료 메시지를 표시하고 메인 페이지로 리디렉션하는 함수
+        function handleReservation(event) {
+            event.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+            // 예약 완료 메시지 표시
+            alert('예약 되었습니다.');
+
+            // 예약 정보 저장
+            const reservationInfo = {
+                date: document.getElementById('boarding_date').value,
+                time: document.getElementById('route_time').value,
+                route: document.getElementById('route').value
+            };
+            localStorage.setItem('reservationInfo', JSON.stringify(reservationInfo));
+
+            // 메인 페이지로 리디렉션
+            window.location.href = 'main.html';
+        }
+
+        // DOM이 완전히 로드되었을 때 실행될 코드
+        document.addEventListener('DOMContentLoaded', function () {
+            // 폼 엘리먼트를 찾고 'submit' 이벤트 리스너 추가
+            const form = document.querySelector('#reservation-form');
+            form.addEventListener('submit', handleReservation);
+        });
+    </script>
+</body>
+
+</html>

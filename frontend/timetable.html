@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>jQuery Mobile</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" href="../dist/css/swiper.min.css">
+	<style>
+		.wrap {
+			width: 100;
+			overflow-x: auto;
+			white-space: nowrap;
+			-ms-overflow-style: none;
+			/* IE and Edge */
+			scrollbar-width: none;
+			/* Firefox */
+		}
+
+		.wrap::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+
+
+<body>
+
+	<div data-role="page" id="page1">
+		<div data-role="header" style="background-color: rgb(137, 28, 33); color: white;">
+			<a href="main.html" data-ajax="false" style="background-color:rgb(243, 152, 43); color: white;">Home</a>
+			<h1>버스시간표</h1>
+		</div>
+		<div data-role="content">
+			<div data-role="collapsible-set" data-theme="b" data-content-theme="e">
+				<div data-role="collapsible">
+					<h3>대구 등교</h3>
+					<div class="c_width">
+						<div class="wrap">
+							<table title="스쿨버스 운행시간표 등교버스 안내"
+								summary="스쿨버스 운행시간표 등교버스 안내를 호차별로 방면, 경유지, 운전기사연락처로 나타낸 표입니다.">
+
+								<thead>
+									<tr>
+										<th scope="col" width="6%">호차</th>
+										<th scope="col" width="14%">방면</th>
+										<th scope="col" width="80%">경유지</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">1</th>
+										<td align="center" valign="middle">
+											<p>수성구</p>
+										</td>
+										<td valign="middle">파동대자연2차(07:40) - 정화우방팔레스 맞은편 엔젤리너스(07:47) - 어린이회관(07:55) -
+											수성네거리 할리스커피 앞(08:00)
+											- 대구법원 앞 횡단보도(08:05) - 더블유여성병원(08:10) - 강촌마을버스정류장 지나서 30m앞(08:15) - 학교</td>
+									</tr>
+									<tr>
+										<th scope="row">2</th>
+										<td align="center" valign="middle">
+											<p>북구</p>
+										</td>
+										<td valign="middle">만평네거리 대구은행(07:50) - 지하철3호선 원대역 1번 출구(07:53) - 침산푸르지오1차 102동
+											앞 대로변(07:57) - 태영신협본점(08:00) - 롯데하이마트 건너편(LPG대평충전소 옆)(08:10) - 팔공IC방면 대구공항
+											담벼락 끝지점 백초농원 앞(08:25) - 학교</td>
+									</tr>
+									<tr>
+										<th scope="row">3</th>
+										<td align="center" valign="middle">
+											<p>달서구·화원</p>
+										</td>
+										<td valign="middle">성당자동차학원 건너 버스정류장(07:38) - 합동약국 앞(07:43) - 월성성당 건너(07:45) -
+											보성은하타운 맥도날드 상인DT 전 건너(07:49) - 전원숯불 상인점(07:53) - 월곡네거리 상인 은행아파트 버스정류장
+											앞(08:00) - 범물치안센터 버스정류장(08:12) - 학교</td>
+									</tr>
+									<tr>
+										<th scope="row">4</th>
+										<td align="center" valign="middle">
+											<p>남구·서구·수성구</p>
+										</td>
+										<td valign="middle">신평리네거리 우리은행(투썸플레이스건너)(07:30) - 두류네거리 두류육교(두류공원네거리 방향)(07:37)
+											- 두류공원네거리 SK충전소(안지랑네거리방향)(07:39) - 앞산힐스테이트(07:55) - 두산오거리 한패밀리요양병원 앞(08:05)
+											- 황금네거리 스피트메이트 앞(08:15) - 학교</td>
+									</tr>
+									<tr>
+										<th scope="row">5</th>
+										<td align="center" valign="middle">
+											<p>칠곡</p>
+										</td>
+										<td valign="middle">맥도날드 칠곡점(07:40) - 칠곡시장 앞 횡단보도(07:43) - 세븐밸리 나이키 앞(07:47) -
+											칠곡화성3차 107동 옆 버스정류장(07:51)
+											- 칠곡영남2차 103동 옆 버스정류장(07:53) - 비로실공원 앞 버스정류장(07:58) - 학교</td>
+									</tr>
+									<tr>
+										<th scope="row">6</th>
+										<td align="center" valign="middle">
+											<p>성서</p>
+										</td>
+										<td valign="middle">우방 죽전아파트 104동 앞 횡단보도(07:30) - 용산청구아파트 육교 밑(성주방향)(07:35) -
+											성서2차서한아파트 106동 옆(성서로)(07:40)
+											- 지하철이곡역3번출구 옆 타이어뱅크(07:47) - 학교</td>
+									</tr>
+									<tr>
+										<th scope="row">7</th>
+										<td align="center" valign="middle">
+											<p>대구행복기숙사</p>
+										</td>
+										<td valign="middle">넘버25호텔 대구역점 앞 대로변 (07:55) - 학교</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div data-role="collapsible">
+					<h3>대구 하교</h3>
+					<div class="c_width">
+						<div class="t3 tal table-responsive">
+							<table title="스쿨버스 운행시간표 하교버스 안내" summary="스쿨버스 운행시간표 하교버스 안내를 호차별로 출발시간, 운행지역으로 나타낸 표입니다.">
+
+								<thead>
+									<tr>
+										<th scope="col" width="30%">호차</th>
+										<th scope="col" width="50%">방면</th>
+										<th scope="col" width="20%">시간</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">1,2,3,4,6호차</th>
+										<td align="center">등교 역순</td>
+										<td rowspan="3" align="center">18:30</td>
+									</tr>
+
+									<tr>
+										<th scope="row">5호차</th>
+										<td align="center">등교 순</td>
+									</tr>
+									<tr>
+										<th scope="row">7호차</th>
+										<td align="center">2호차 탑승</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div data-role="collapsible">
+					<h3>자율하차(시내권 순환버스(1대) - 월~금 운행)</h3>
+					<div class="c_width">
+						<div class="wrap">
+							<table title="시내권 순환버스(2대) - 월~금 운행"
+								summary="호차, 학교 출발시간, 경유지 순으로 시내권 순환버스(1대) - 월~금 운행을 나타낸 표입니다.">
+
+								<thead>
+									<tr>
+										<th scope="col" width="15%">학교 출발시간</th>
+										<th scope="col" width="70%">경유지</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+
+										<th>16:10출발<br>
+											(안심노선승강장)</th>
+										<td align="left">
+											<p>학교 → 안심역 → 효목네거리 → 복현오거리 → 노원네거리 → 만평네거리 → 칠곡IC 전 자율 하차
+												<br>위 구간 중 원하는 지점 하차 가능 <font color="#FF0000"><strong>(첫번째 하차지 안심역 이전에는
+														하차 불가)</font>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<th>17:20출발<br>
+											(임당노선승강장)</th>
+										<td align="left">학교 → 영남대역 → 임당역 → 달구벌대로 → 성서홈플러스 자율 하차<br>
+											위 구간 중 원하는 지점 하차 가능 <font color="#FF0000"><strong>(첫번째 하차지 영남대역 이전에는 하차 불가)
+											</font>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div data-role="collapsible">
+					<h3>안심·임당 등교[안심역 3번 출구, 임당역 5번 출구]</h3>
+					<div class="c_width">
+						<div class="wrap">
+							<table title="스쿨버스 운행시간표 안내" summary="스쿨버스 운행시간표 안내를 구분, 출발지점, 경유지, 도착지, 배정 순으로 나타낸 표입니다.">
+
+
+								<thead>
+									<tr>
+										<th scope="col" width="10%">구분</th>
+										<th scope="col" width="20%">출발지점</th>
+										<th scope="col" width="20%">경유지</th>
+										<th scope="col" width="20%">도착지</th>
+										<th scope="col" width="20%">배정</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th rowspan="15">등교</th>
+										<td align="center" valign="middle">안심역 08:20</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 08:35</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+
+									<tr>
+										<td align="center" valign="middle">안심역 09:20</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 09:40</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">안심역 09:25</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 09:45</td>
+										<td align="center" valign="middle">학교 45</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">안심역 09:30</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 09:50</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">안심역 10:00</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 10:15</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">안심역 10:30</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 10:45</td>
+										<td align="center" valign="middle">학교 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">안심역 11:00</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 11:15</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 08:10</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 08:45</td>
+										<td align="center" valign="middle">학교 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 09:05</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 09:25</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 09:20</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 09:40</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 09:25</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 09:45</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 09:50</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 10:10</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 10:25</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 10:55</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 11:00</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 11:30</td>
+										<td align="center" valign="middle">학교 15</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">임당역 11:30</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">학교 11:50</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td valign="middle"> </td>
+									</tr>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div data-role="collapsible">
+					<h3>안심·임당 하교[안심역 3번 출구, 임당역 5번 출구]</h3>
+					<div class="c_width">
+						<div class="t3 tal table-responsive">
+							<table title="스쿨버스 운행시간표 안내" summary="스쿨버스 운행시간표 안내를 구분, 출발지점, 경유지, 도착지, 배정 순으로 나타낸 표입니다.">
+
+
+								<thead>
+									<tr>
+										<th scope="col" width="10%">구분</th>
+										<th scope="col" width="20%">출발지점</th>
+										<th scope="col" width="20%">경유지</th>
+										<th scope="col" width="20%">도착지</th>
+										<th scope="col" width="20%">배정</th>
+										<th scope="col" width="10%">비고</th>
+									</tr>
+								</thead>
+								<tbody>
+									<th rowspan="12">하교</th>
+									<td align="center" valign="middle">학교 15:00</td>
+									<td align="center" valign="middle">안심역 15:15</td>
+									<td align="center" valign="middle">임당역 15:35</td>
+									<td align="center" valign="middle">부림 45</span>인승</td>
+									<td align="center" valign="middle">경유</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 15:30</td>
+										<td align="center" valign="middle">안심역 15:45</td>
+										<td align="center" valign="middle">임당역 16:05</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">경유</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 16:30</td>
+										<td align="center" valign="middle">안심역 16:45</td>
+										<td align="center" valign="middle">임당역 17:05</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">경유</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 17:00</td>
+										<td align="center" valign="middle">안심역 17:15</td>
+										<td align="center" valign="middle">임당역 17:35</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">경유</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 17:20</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">안심역 17:40</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 17:40</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">안심역 18:00</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 18:00</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">안심역 18:20</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle"> </td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 18:00</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">임당역 18:30</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 18:45</td>
+										<td align="center" valign="middle">→</td>
+										<td align="center" valign="middle">임당역 19:15</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 19:10</td>
+										<td align="center" valign="middle">안심역 19:25</td>
+										<td align="center" valign="middle">임당역 19:45</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">경유
+
+
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 20:10</td>
+										<td align="center" valign="middle">안심역 20:25</td>
+										<td align="center" valign="middle">임당역 20:45</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">경유</td>
+									</tr>
+									<tr>
+										<td align="center" valign="middle">학교 21:10</td>
+										<td align="center" valign="middle">안심역 21:25</td>
+										<td align="center" valign="middle">임당역 21:40</td>
+										<td align="center" valign="middle">부림 45</span>인승</td>
+										<td align="center" valign="middle">경유</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-role="footer" style="background-color: rgb(137, 28, 33); color: white;" data-position="fixed">
+				<h4>KIU-GO</h4>
+			</div>
+		</div>
+
+</body>
+
+</html>

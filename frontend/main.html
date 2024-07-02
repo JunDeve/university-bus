@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경일 유니버스</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <script src="main.js" defer></script> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>경일 유니버스</h1>
+        </div>
+        <div class="button-container">
+            <a href="reservation.html" class="large-button-1">버스<br> 예약</a>
+            <div class="vertical-buttons">
+                <a href="timetable.html" class="small-button-1">버스<br>시간표</a>
+                <a href="https://www.kiu.ac.kr/pages/sub.htm?nav_code=kiu1594366029" class="small-button-2">공지 사항</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="reservation-container">
+        <h2 id="reservation-status">예약 정보를 확인할 수 없습니다.</h2>
+        <button id="cancel-reservation" style="display: none; margin: 0 auto;" >예약 취소</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const reservationStatus = document.getElementById('reservation-status');
+            const storedReservationInfo = localStorage.getItem('reservationInfo');
+            const cancelReservationBtn = document.getElementById('cancel-reservation');
+
+            if (storedReservationInfo) {
+                const reservationInfo = JSON.parse(storedReservationInfo);
+                reservationStatus.innerHTML = `예약이 되어있습니다.<br>${reservationInfo.date} ${reservationInfo.time} 차가<br>예약되었습니다.`;
+                cancelReservationBtn.style.display = 'block';
+
+                fetch('/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationInfo)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('성공:', data);
+                })
+                .catch((error) => {
+                    console.error('실패:', error);
+                });
+
+            } else {
+                reservationStatus.textContent = '예약 정보를 확인할 수 없습니다.';
+                cancelReservationBtn.style.display = 'none';
+            }
+
+            document.getElementById('cancel-reservation').addEventListener('click', function () {
+                localStorage.removeItem('reservationInfo');
+                fetch('/cancel', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('예약 취소 성공:', data);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('예약 취소 실패:', error);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

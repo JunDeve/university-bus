@@ -1,0 +1,139 @@
+﻿.container {
+    text-align: center;
+    /* 버튼을 가운데 정렬 */
+    width: 300px;
+    /* 라지버튼1과 스몰버튼1,2의 가로 길이 합 */
+    margin: auto;
+    /* 가운데 정렬을 위해 auto 값 설정 */
+    padding-top: 100px;
+    /* 위쪽 여백 추가 */
+    padding-bottom: 10px;
+    /* 아래쪽 여백 추가 */
+}
+
+.header {
+    background-color: rgb(137, 28, 33);
+    /* 주어진 RGB 색상 */
+    color: white;
+    /* 흰색 글자색 */
+    padding: 20px 0;
+    /* 위아래 여백 */
+    border-radius: 10px;
+    /* 모든 버튼의 모서리를 둥글게 만듦 */
+    margin-bottom: 10px;
+    /* 아래 여백 추가 */
+}
+
+.header h1 {
+    font-size: 36px;
+    /* 글자 크기를 좀 더 크게 설정 */
+    margin: 0;
+    /* 헤더 내부 여백 제거 */
+}
+
+.button-container {
+    display: flex;
+    /* 버튼을 수평으로 정렬하기 위해 Flexbox 사용 */
+    justify-content: space-around;
+    /* 가운데 정렬 */
+    align-items: center;
+    /* 가운데 정렬 */
+}
+
+.large-button-1 {
+    width: 150px;
+    /* 라지버튼 가로 길이 */
+    height: 300px;
+    /* 라지버튼 세로 길이 */
+    background-color: #FAEBD7;
+    color: rgb(137, 28, 33);
+    /* 검은색 글자색 */
+    border: none;
+    /* 테두리 제거 */
+    margin: 5px;
+    /* 버튼 위아래 여백 설정 */
+    border-radius: 15px;
+    /* 모든 버튼의 모서리를 둥글게 만듦 */
+    font-size: 40px;
+    /* 버튼 글자 크기 */
+    cursor: pointer;
+    /* 마우스 커서를 포인터로 변경하여 클릭 가능한 상태로 표시 */
+    display: flex;
+    /* Flexbox 레이아웃 사용 */
+    justify-content: center;
+    /* 가로 방향 가운데 정렬 */
+    align-items: center;
+    /* 세로 방향 가운데 정렬 */
+    font-weight: bolder;
+}
+
+.small-button-1 {
+    width: 150px;
+    /* 라지버튼 가로 길이 */
+    height: 145px;
+    /* 라지버튼 세로 길이 */
+    background-color: #FAEBD7;
+    color: rgb(137, 28, 33);
+    /* 검은색 글자색 */
+    border: none;
+    /* 테두리 제거 */
+    margin: 5px;
+    /* 버튼 위아래 여백 설정 */
+    border-radius: 15px;
+    /* 모든 버튼의 모서리를 둥글게 만듦 */
+    font-size: 30px;
+    /* 버튼 글자 크기 */
+    cursor: pointer;
+    /* 마우스 커서를 포인터로 변경하여 클릭 가능한 상태로 표시 */
+    display: flex;
+    /* Flexbox 레이아웃 사용 */
+    justify-content: center;
+    /* 가로 방향 가운데 정렬 */
+    align-items: center;
+    /* 세로 방향 가운데 정렬 */
+    font-weight: bolder;
+}
+
+.small-button-2 {
+    width: 150px;
+    /* 라지버튼 가로 길이 */
+    height: 145px;
+    /* 라지버튼 세로 길이 */
+    background-color: #FAEBD7;
+    color: rgb(137, 28, 33);
+    /* 검은색 글자색 */
+    border: none;
+    /* 테두리 제거 */
+    margin: 5px;
+    /* 버튼 위아래 여백 설정 */
+    border-radius: 15px;
+    /* 모든 버튼의 모서리를 둥글게 만듦 */
+    font-size: 30px;
+    /* 버튼 글자 크기 */
+    cursor: pointer;
+    /* 마우스 커서를 포인터로 변경하여 클릭 가능한 상태로 표시 */
+    display: flex;
+    /* Flexbox 레이아웃 사용 */
+    justify-content: center;
+    /* 가로 방향 가운데 정렬 */
+    align-items: center;
+    /* 세로 방향 가운데 정렬 */
+    font-weight: bolder;
+}
+
+.small-button-1,
+.small-button-2,
+.large-button-1 {
+    text-decoration: none;
+    /* 각 버튼의 밑줄을 없앰 */
+}
+
+.reservation-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#reservation-status {
+    font-size: 24px;
+    font-weight: bold;
+}
